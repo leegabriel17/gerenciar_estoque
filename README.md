@@ -1,7 +1,7 @@
 # gerenciar_estoque
 ## Objetivo
 
-Este projeto é uma aplicação de controle de estoque desenvolvida em Java utilizando o framework Spring Boot. O objetivo é fornecer uma API para gerenciamento de produtos em estoque, incluindo operações de cadastro, consulta, atualização e remoção.
+Este projeto é uma API REST para controle de estoque desenvolvida em Java utilizando o framework Spring Boot. O objetivo é fornecer endpoints para gerenciamento de produtos em estoque, incluindo operações de cadastro, consulta, atualização e remoção.
 
 ## Tecnologias e Ferramentas Utilizadas
 
@@ -23,6 +23,9 @@ Este projeto é uma aplicação de controle de estoque desenvolvida em Java util
 
 1. Certifique-se de ter o Docker e o Docker Compose instalados.
 2. Execute o comando abaixo na raiz do projeto para subir os containers:
+   ```
+   docker-compose up
+   ```
 3. A aplicação estará disponível em `http://localhost:8080`.
 
 ## Configuração do Banco de Dados
@@ -37,3 +40,4 @@ O banco de dados PostgreSQL será iniciado automaticamente via Docker Compose, c
 
 - As configurações de acesso ao banco estão definidas no arquivo `docker-compose.yml`.
 - Para customizações, altere as variáveis de ambiente conforme necessário.
+- A documentação dos endpoints pode ser acessada (se disponível) em `/swagger-ui.html` após a aplicação estar em execução.
