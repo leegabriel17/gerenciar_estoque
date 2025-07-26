@@ -1,12 +1,10 @@
+// src/main/java/com/gerenciador/estoque/controller/ProdutoController.java
 package com.gerenciador.estoque.controller;
 
-
-import com.gerenciador.estoque.converter.ProdutoConverter;
+import com.gerenciador.estoque.service.ProdutoService;
+import com.gerenciador.estoque.dto.ProdutoRequest;
 import com.gerenciador.estoque.model.ProdutoDAO;
-import com.gerenciador.estoque.model.ProdutoEntity;
-import com.gerenciador.estoque.repository.ProdutoRepository;
-import com.gerenciador.estoque.view.ProdutoRequest;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,25 +13,31 @@ import java.util.List;
 @RequestMapping("/produtos")
 public class ProdutoController {
 
-    private final ProdutoRepository produtoRepository;
+    @Autowired
+    private ProdutoService produtoService;
 
-    public ProdutoController(ProdutoRepository produtoRepository) {
-        this.produtoRepository = produtoRepository;
+    @PostMapping("/save")
+    public ProdutoDAO salvar(@RequestBody ProdutoRequest produtoRequest) {
+        return produtoService.salvar(produtoRequest);
     }
 
-    @GetMapping
-    public List<ProdutoEntity> listarTodos() {
-        return produtoRepository.findAll();
+    @PutMapping("/{id}")
+    public ProdutoDAO atualizar(@PathVariable Long id, @RequestBody ProdutoRequest produtoRequest) {
+        return produtoService.atualizar(id, produtoRequest);
     }
 
-    @PostMapping
-    public ProdutoDAO salvar(@RequestBody @Validated ProdutoRequest produtoRequest) {
-        ProdutoDAO produto = ProdutoConverter.toDao(produtoRequest);
-        if (produto.getId() != null) {
-            ProdutoEntity existingProduto = produtoRepository.findById(produto.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + produto.getId()));
-        }
-        ProdutoEntity produtoEntity = ProdutoConverter.toEntity(produto);
-        return ProdutoConverter.toDao(produtoRepository.save(produtoEntity));
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        produtoService.deletar(id);
+    }
+
+    @GetMapping("/list")
+    public List<ProdutoDAO> listarTodos() {
+        return produtoService.listarTodos();
+    }
+
+    @GetMapping("/{id}")
+    public ProdutoDAO buscarPorId(@PathVariable Long id) {
+        return produtoService.buscarPorId(id);
     }
 }

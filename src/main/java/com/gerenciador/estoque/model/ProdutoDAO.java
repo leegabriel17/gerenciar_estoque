@@ -1,13 +1,28 @@
 package com.gerenciador.estoque.model;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
+@Data
 public class ProdutoDAO {
     private Long id;
     private String nome;
     private String tipo;
     private int quantidade;
     private BigDecimal preco;
+
+    public ProdutoDAO(Long id, String nome, String tipo, int quantidade, BigDecimal preco) {
+        this.id = id;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.quantidade = quantidade;
+        this.preco = preco;
+    }
+
+    public ProdutoDAO() {
+
+    }
 
     public Long getId() {
         return id;

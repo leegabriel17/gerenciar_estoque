@@ -1,38 +1,27 @@
 package com.gerenciador.estoque.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Entity
-@Table(name = "produto")
+@Table(name = "produtos")
 public class ProdutoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name= "nome")
     private String nome;
 
-    @Column(nullable = false)
+    @Column(name = "tipo")
     private String tipo;
 
-    @Column(nullable = false)
-    private Integer quantidade;
+    @Column(name = "quantidade" )
+    private int quantidade;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(name = "preco", nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
     public Long getId() {
@@ -59,7 +48,7 @@ public class ProdutoEntity {
         this.tipo = tipo;
     }
 
-    public Integer getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 

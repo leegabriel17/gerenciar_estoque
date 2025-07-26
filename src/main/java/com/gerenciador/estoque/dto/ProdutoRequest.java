@@ -1,4 +1,4 @@
-package com.gerenciador.estoque.view;
+package com.gerenciador.estoque.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

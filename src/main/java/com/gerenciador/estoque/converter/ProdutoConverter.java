@@ -2,7 +2,7 @@ package com.gerenciador.estoque.converter;
 
 import com.gerenciador.estoque.model.ProdutoDAO;
 import com.gerenciador.estoque.model.ProdutoEntity;
-import com.gerenciador.estoque.view.ProdutoRequest;
+import com.gerenciador.estoque.dto.ProdutoRequest;
 
 public class ProdutoConverter {
 

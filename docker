@@ -1,18 +1,14 @@
-version: '3.8'
-
 services:
-  mysql:
-    image: mysql:8
-    restart: always
+  postgres:
+    image: postgres:16
     environment:
-      MYSQL_DATABASE: estoque
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: rootpass
+      POSTGRES_DB: estoque_db
+      POSTGRES_USER: glee
+      POSTGRES_PASSWORD: 12345
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - pgdata:/var/lib/postgresql/data
 
   backend:
     build: ./backend
@@ -20,18 +16,11 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/estoque
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/estoque_db
+      SPRING_DATASOURCE_USERNAME: glee
+      SPRING_DATASOURCE_PASSWORD: 12345
     depends_on:
-      - mysql
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
+      - postgres
 
 volumes:
-  mysql_data:
+  pgdata:
